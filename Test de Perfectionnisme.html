@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Perfectionnisme</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <div class="container">
+    <a href="https://www.youtube.com/@krushpoker"><img src="Krush bannière.jpg" width=100% height=100% href="https://www.youtube.com/@krushpoker"></a>
+    <h1>Test de Perfectionnisme</h1>
+    
+    <p>Sur les dernières années, j'ai pu constater que bon nombre de joueurs de poker étaient perfectionnistes, trop perfectionnistes avec toutes les conséquences positives mais aussi négatives de ce comportement.</p>
+    
+    <p>Dans un premier temps, il est essentiel de savoir qu'on distingue 2 types de perfectionnismes :</p>
+    
+    <h2>1️⃣ Perfectionnisme adaptatif</h2>
+    <p>Il se caractérise par la poursuite de normes élevées mais cohérentes associées à des niveaux de satisfaction lorsqu'on atteint des objectifs, plutôt intéressant dans le poker. L'idée étant que quand j'ai atteint un objectif ou un palier, je veux directement redynamiser les choses et aller au dessus en faisant correctement ce qu'il faut pour y parvenir. Le temps que les actions, les KPI liées à ce comportement sont correctes, aucun problème majeur.</p>
+    
+    <h2>2️⃣ Perfectionnisme inadapté</h2>
+    <p>Ce type de perfectionnisme est associé à des préoccupations excessives concernant les erreurs, les attentes irréalistes, et un besoin constant de validation externe. C'est le perfectionnisme qui mène à des conséquences néfastes sur le bien-être mental et évidemment, la performance.</p>
+    
+    <p>Les perfectionnistes inadaptés sont typiquement plus enclins à se culpabiliser, à ruminer, à stresser (puisque non en contrôle) avec une vision assez dichotomique de la réussite, le mode "tout ou rien", où tout échec est considéré comme un échec généralisé avec une remise en question potentielle du soi et de l'identité générale.</p>
+    
+    <p>Ces comportements mènent de manière évidente à des schémas de dépression, une perte d'estime de soi, d'anxiété généralisée avec en parallèle ou conséquence, entre autres, des stratégies d'évitement assez claires de toute situation anxiogène qui nous ramènera à ces échecs perçus.</p>
+    
+    <h2>📝 Cas pratique dans le poker</h2>
+    <p>Un joueur, avec évidemment un background X à prendre en considération, une confiance en lui plus ou moins bonne (facteur important ici), tend vers un perfectionnisme inadapté avec quelques exemples suivants :</p>
+    <ul>
+        <li>Cherche à jouer parfaitement les mains où il n'a pour l'instant pas la compétence ou la connaissance</li>
+        <li>Cherche à jouer chaque main parfaitement, quelque soit</li>
+        <li>Ne comprend pas qu'il y a une différence entre la connaissance des spots à froid et la pratique due au contexte du "In Game" (nécessité d'énergie haute, de concentration haute, multitabling, décisions sous stress, etc.)</li>
+        <li>Pense qu'il doit avoir une routine parfaite pour réussir</li>
+        <li>A vu un joueur pro faire X chose et doit impérativement fonctionner comme ça par pur mimétisme</li>
+        <li>Pense qu'il doit réussir uniquement pour faire plaisir à quelqu'un ou à un groupe de personnes</li>
+    </ul>
+    
+    <p>Ce joueur ne se rend pas compte qu'il pose son attention et ses pseudos volontés de perfection sur des situations qui n'ont pas lieu d'être. L'erreur et l'imperfection faisant partie intégrante de la performance.</p>
+    
+    <p>On pourrait citer bon nombre de situations où le perfectionnisme n'est pas sain, mal calibré, et engendrera forcément les conséquences évoquées ci-dessus.</p>
+    
+    <h2>🧪 Test individuel</h2>
+    <p>Pour vous aider à comprendre les choses et à vous auto-évaluer, je vous propose une version du Multidimensional Perfectionism Scale (MPS) de Hewitt et Flett, questionnaire complet comprenant 45 items, qui évaluent trois dimensions du perfectionnisme : le perfectionnisme orienté vers soi, le perfectionnisme orienté vers les autres, et le perfectionnisme socialement prescrit.</p>
+    <form id="testForm">
+      <h4>Évaluez chaque énoncé de 1 (Totalement en désaccord) à 7 (Totalement d'accord) :</h4>
+      <div id="questions"></div>
+      <button type="button" onclick="calculerScore()">Voir les résultats</button>
+    </form>
+    
+    <div class="result-section">
+      <h2>Résultats :</h2>
+      <div class="result-category">
+        <h3>Perfectionnisme orienté vers soi</h3>
+        <p id="resultatSelf"></p>
+      </div>
+      <div class="result-category">
+        <h3>Perfectionnisme orienté vers les autres</h3>
+        <p id="resultatOther"></p>
+      </div>
+      <div class="result-category">
+        <h3>Perfectionnisme socialement prescrit</h3>
+        <p id="resultatSocial"></p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Liste des 45 questions dans l'ordre
+    const questions = [
+      // Self-Oriented Perfectionism (15 questions : items 1 à 15)
+      "J’attends de moi-même que tout soit parfait.",
+      "Je suis rarement satisfait de mes réalisations.",
+      "Je me critique toujours quand je fais une erreur.",
+      "Je me fixe des objectifs extrêmement élevés.",
+      "Je sens que je dois réussir dans tout ce que je fais.",
+      "Même quand je réussis, je pense que j'aurais pu faire mieux.",
+      "Je dois atteindre les plus hauts standards pour être satisfait.",
+      "Je m'efforce toujours d'atteindre la perfection dans mon travail.",
+      "Je suis rarement content de ma performance.",
+      "J’ai peur de ne pas être à la hauteur de mes propres attentes.",
+      "Je continue à travailler sur quelque chose jusqu'à ce que ce soit parfait.",
+      "Je ne supporte pas l'idée de faire des erreurs dans ce que je fais.",
+      "Je me blâme souvent pour ne pas atteindre mes objectifs.",
+      "Mes standards personnels sont très élevés.",
+      "Si je ne suis pas parfait, je considère que j’ai échoué.",
+
+      // Other-Oriented Perfectionism (15 questions : items 16 à 30)
+      "J'attends que les autres respectent mes standards.",
+      "Les gens devraient toujours faire de leur mieux.",
+      "Je critique souvent les autres quand ils ne réussissent pas.",
+      "Je m’attends à ce que mes proches respectent mes attentes élevées.",
+      "Les autres ne font pas assez d'efforts pour bien faire les choses.",
+      "Je suis déçu quand les autres ne respectent pas mes standards.",
+      "Si je confie une tâche à quelqu'un, je m'attends à ce qu'elle soit parfaite.",
+      "Les gens autour de moi devraient toujours être performants.",
+      "Je deviens frustré lorsque les autres échouent.",
+      "Je pense que les gens devraient atteindre la perfection dans tout ce qu’ils font.",
+      "J’ai souvent l’impression que les autres ne répondent pas à mes attentes.",
+      "Je m’attends à ce que mes amis ou collègues soient parfaits dans ce qu’ils entreprennent.",
+      "J’ai tendance à être très exigeant envers les autres.",
+      "Les autres me déçoivent souvent quand ils ne réussissent pas.",
+      "Si quelque chose doit être fait correctement, il vaut mieux que je le fasse moi-même.",
+
+      // Socially Prescribed Perfectionism (15 questions : items 31 à 45)
+      "Les autres s'attendent à ce que je sois parfait.",
+      "Je sens une pression constante pour réussir à tout prix.",
+      "Les gens autour de moi sont déçus si je fais des erreurs.",
+      "Je dois réussir pour répondre aux attentes des autres.",
+      "Les gens me jugent si je ne fais pas tout parfaitement.",
+      "J'ai l'impression que les autres attendent toujours la perfection de moi.",
+      "Je me sens sous pression pour être toujours au top dans tout ce que je fais.",
+      "Mes parents ou proches s'attendent toujours à ce que je sois parfait.",
+      "Je sens que je dois faire des choses pour ne pas décevoir les autres.",
+      "Même si je réussis, les autres ne sont pas satisfaits à moins que ce soit parfait.",
+      "Les attentes des autres envers moi sont souvent trop élevées.",
+      "Les gens autour de moi attendent toujours de moi que je réussisse.",
+      "J'ai peur de décevoir les autres si je ne fais pas tout parfaitement.",
+      "Je me sens jugé constamment par mon entourage pour mes résultats.",
+      "Les gens sont critiques si je ne fais pas aussi bien qu’ils l’espèrent."
+    ];
+
+    // Génère les questions dans la page avec titres de catégories
+    function genererQuestions() {
+      const container = document.getElementById("questions");
+
+      // Insertion d'un titre pour la première catégorie
+      let headerSelf = document.createElement("h2");
+      headerSelf.textContent = "Perfectionnisme orienté vers soi";
+      container.appendChild(headerSelf);
+
+      questions.forEach((question, index) => {
+        // Ajout des titres de catégorie pour les autres groupes
+        if (index === 15) {
+          let headerOther = document.createElement("h2");
+          headerOther.textContent = "Perfectionnisme orienté vers les autres";
+          container.appendChild(headerOther);
+        } else if (index === 30) {
+          let headerSocial = document.createElement("h2");
+          headerSocial.textContent = "Perfectionnisme socialement prescrit";
+          container.appendChild(headerSocial);
+        }
+        const div = document.createElement("div");
+        div.className = "question";
+        div.innerHTML = `
+          <label>${question}</label>
+          <input type="range" min="1" max="7" step="1" value="4" id="q${index}">
+          <span class="range-value" id="valeur${index}">4</span>
+        `;
+        container.appendChild(div);
+        // Met à jour la valeur affichée lorsque le curseur change
+        const input = div.querySelector("input[type='range']");
+        const span = div.querySelector("span.range-value");
+        input.addEventListener('input', () => { span.textContent = input.value; });
+      });
+    }
+
+    // Fonction pour interpréter un score dans une catégorie (plage 15 à 105)
+    function interpreterScore(score) {
+      if (score >= 15 && score <= 35) {
+        return "Faibles attentes (peu d'impact sur le bien-être).";
+      } else if (score >= 36 && score <= 70) {
+        return "Niveau modéré (attentes plus équilibrées).";
+      } else if (score >= 71 && score <= 105) {
+        return "Perfectionnisme excessif, avec des conséquences potentielles sur le bien-être (anxiété, dépression, relations tendues).";
+      } else {
+        return "Score hors échelle attendue.";
+      }
+    }
+
+    // Calcul des scores pour les 3 catégories (15 questions par catégorie)
+    function calculerScore() {
+      let scoreSelf = 0, scoreOther = 0, scoreSocial = 0;
+      
+      // Self-Oriented : items 1 à 15 (indices 0 à 14)
+      for (let i = 0; i < 15; i++) {
+        scoreSelf += parseInt(document.getElementById(`q${i}`).value);
+      }
+      
+      // Other-Oriented : items 16 à 30 (indices 15 à 29)
+      for (let i = 15; i < 30; i++) {
+        scoreOther += parseInt(document.getElementById(`q${i}`).value);
+      }
+      
+      // Socially Prescribed : items 31 à 45 (indices 30 à 44)
+      for (let i = 30; i < 45; i++) {
+        scoreSocial += parseInt(document.getElementById(`q${i}`).value);
+      }
+      
+      // Interprétation des scores par catégorie
+      const interprSelf = interpreterScore(scoreSelf);
+      const interprOther = interpreterScore(scoreOther);
+      const interprSocial = interpreterScore(scoreSocial);
+      
+      // Affichage des résultats
+      document.getElementById("resultatSelf").textContent = `Perfectionnisme orienté vers soi : ${scoreSelf} - ${interprSelf}`;
+      document.getElementById("resultatOther").textContent = `Perfectionnisme orienté vers les autres : ${scoreOther} - ${interprOther}`;
+      document.getElementById("resultatSocial").textContent = `Perfectionnisme socialement prescrit : ${scoreSocial} - ${interprSocial}`;
+    }
+
+    window.onload = genererQuestions;
+  </script>
+</body>
+</html>
